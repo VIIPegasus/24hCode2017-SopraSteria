@@ -7,18 +7,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var AppComponent = (function () {
-    function AppComponent() {
+var default_1 = (function () {
+    function default_1() {
     }
-    return AppComponent;
+    return default_1;
 }());
-AppComponent = __decorate([
+default_1 = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        template: "\n\n    <a [routerLink]=\"['/']\">Game 1</a>\n\t  <a [routerLink]=\"['/alt']\">Game 2</a>\n    <div class=\"outer-outlet\">\n      <router-outlet></router-outlet>\n    </div>\n  ",
+        selector: '1024',
         // add our router directives we will be using
         directives: [router_1.ROUTER_DIRECTIVES]
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.components.js.map
+], default_1);
+1024;
+core_1.Component;
+{
+}
+//# sourceMappingURL=1024.components.js.map

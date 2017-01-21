@@ -14,4 +14,6 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
   // add our router directives we will be using
   directives: [ROUTER_DIRECTIVES]
 })
-export class AppComponent { }
+export class AppComponent {
+  
+}
