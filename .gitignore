@@ -1,33 +1,18 @@
-# eclipse specific git ignore
-*.pydevproject
-.project
-.metadata
-bin/**
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
+OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# External tool builders
-.externalToolBuilders/
+# PACKAGES #
+######################
+node_modules/
+bower_components/
+public/node_modules/
+public/bower_components/
 
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-.idea
-node_modules
-jspm_packages
-npm-debug.*
-link-checker-results.txt
-app/**/*.js
-*.js.map
-e2e/**/*.js
-e2e/**/*.js.map
-_test-output
-_temp
+# FILES #
+######################
