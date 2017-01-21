@@ -1,3 +1,22 @@
+OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# PACKAGES #
+######################
+node_modules/
+bower_components/
+public/node_modules/
+public/bower_components/
+
+# FILES #
+######################
+
 # eclipse specific git ignore
 *.pydevproject
 .project
@@ -20,14 +39,12 @@ local.properties
 # Locally stored "Eclipse launch configurations"
 *.launch
 
-.idea
+system-config.js*
+app/**/*.js
+app/**/*.map
 node_modules
 jspm_packages
-npm-debug.*
-link-checker-results.txt
-app/**/*.js
-*.js.map
-e2e/**/*.js
-e2e/**/*.js.map
-_test-output
-_temp
+bower_components
+aot/*
+dist/*
+yarn.lock
