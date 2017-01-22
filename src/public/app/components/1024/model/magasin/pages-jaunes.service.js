@@ -29,14 +29,12 @@ var PagesJaunes = (function () {
         var baseUrl = "https://api.apipagesjaunes.fr/pros/find.json";
         var urlArgs = "what=" + type + "&where=cZ" + lon + "," + lat + "&proximity=true";
         console.log(baseUrl + urlArgs);
-        var a;
-        result.push(a.test());
-        /*
-        this.http.get(baseUrl + "?" + urlArgs)
-        .map(res => res.json())
-        .subscribe(data => {
-          result = data;
-      });*/
+        /*this.http.get(baseUrl + "?" + urlArgs)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (data) {
+            result = data;
+        });*/
+        console.log(result);
         return result;
     };
     return PagesJaunes;
