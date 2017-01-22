@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Angular QuickStart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+	
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+	
+	<link rel="stylesheet" href="leaflet-routing-machine.css" />
+	<script src="leaflet-routing-machine.js"></script>
+	
+	<link rel="stylesheet" href="L.Mappy.css" />
+	<script src="L.Mappy.js"></script>
+	
+    <script src="systemjs.config.js"></script>
+    <script>
+		System.import('app').catch(function(err){ console.error(err); });
+    </script>
+	
+	<style type="text/css">
+
+		#map {
+		height: 600px;
+		width: 600px;
+		margin-right: auto;
+		margin-left: auto;
+		}
+
+	</style>
+	
+  </head>
+
+  <body>
+    <my-app>Loading AppComponent content here ...</my-app>
+	
+	<div id="map"></div>
+	<script>
+		// initialize the map on the "map" div with a given center and zoom
+	var lat = 0,lng = 0;
+	var exampleMap1;
+	L.Mappy.setImgPath("./images/");
+	// Instantiation du clientId pour utiliser le service de route
+	L.Mappy.setClientId("documentation");
+	
+	var options = {
+		vehicle: L.Mappy.Vehicles.comcar,
+		cost: "length", // or "time" or "price"
+		gascost: 1.0,
+		gas: "petrol", // or diesel, lpg
+		nopass: 0, // 1 pour un trajet sans col
+		notoll: 0, // 1 pour un trajet sans péage
+		infotraffic: 0 // 1 pour un trajet avec trafic
+	};
+	
+	var myIcon = L.icon({
+		iconUrl: 'images/car.png',
+		iconSize: [32, 32],
+		iconAnchor: [16, 16],
+		popupAnchor: [-3, -76]
+	});
+	
+	var myIconDest = L.icon({
+		iconUrl: 'images/X_red.png',
+		iconSize: [32, 32],
+		iconAnchor: [16, 16],
+		popupAnchor: [-3, -76]
+	});
+	
+	var myIconBakery = L.icon({
+		iconUrl: 'images/pain.png',
+		iconSize: [32, 37],
+		iconAnchor: [16, 18],
+		popupAnchor: [-3, -76]
+	});
+	
+	var myIconGasStation = L.icon({
+		iconUrl: 'images/essence.png',
+		iconSize: [32, 32],
+		iconAnchor: [16, 16],
+		popupAnchor: [-3, -76]
+	});
+	
+	var myIconTools = L.icon({
+		iconUrl: 'images/outil.png',
+		iconSize: [32, 32],
+		iconAnchor: [16, 16],
+		popupAnchor: [-3, -76]
+	});
+	
+	var myIconPolice = L.icon({
+		iconUrl: 'images/tardis.png',
+		iconSize: [32, 32],
+		iconAnchor: [16, 16],
+		popupAnchor: [-3, -76]
+	});
+	
+	var bFirst = true;
+	
+	// La géolocalisation est-elle prise en charge par le navigateur ?
+	
+	var map = document.getElementById("map");
+	if(bFirst){
+		if(navigator.geolocation)
+		{
+			navigator.geolocation.getCurrentPosition(setInitialMap, errorHandler);
+		}
+		else
+		{
+			alert('Votre navigateur ne prend malheureusement pas en charge la géolocalisation.');
+		}
+	}
+	
+	var markerDest;
+	var marker;
+	var exampleMap1;
+	var lastLat, lastLng;
+	var route;
+	
+	function setInitialMap(position)
+	{
+		
+		//alert('Latitude : '+ position.coords.latitude +' - Longitude : '+ position.coords.longitude);
+		if(bFirst){
+			lat = position.coords.latitude;
+			lng = position.coords.longitude;
+			
+		}
+		
+		exampleMap1 = new L.Mappy.Map("map", {
+			clientId: 'dri_24hducode',
+			center: [lat, lng],
+			zoom: 12
+		});
+		marker = L.marker([lat, lng], {icon: myIcon}).addTo(exampleMap1);
+		
+		exampleMap1.addEventListener("click", function (event) { // clic sur le map
+		
+			lastLat = event.latlng.lat;
+			lastLng = event.latlng.lng;
+			
+			
+			
+			// On cherche les résultats pour "47 rue de charonne Paris"
+			route = L.Mappy.Services.route([L.latLng(lat, lng), L.latLng(lastLat, lastLng)],
+				options,
+				// Callback de succès
+				function(result) {
+					route = L.Mappy.route(result.routes).addTo(exampleMap1);
+					var summary = result.routes.route[0].summary;
+					var roadbook = result.routes.route[0].actions.action;
+				},
+				// Callback d'erreur
+				function(errorType) {
+					// Error during route calculation
+				}
+			);
+			markerDest = L.marker([event.latlng.lat,event.latlng.lng], {icon: myIconDest}).addTo(exampleMap1);
+			
+			setTimeout(afterclic,500);
+			
+		});
+
+		bFirst = false;
+	}
+	
+	function errorHandler(error)
+	{
+		// On log l'erreur sans l'afficher, permet simplement de débugger.
+		console.log('Geolocation error : code '+ error.code +' - '+ error.message); 
+
+		// Affichage d'un message d'erreur plus "user friendly" pour l'utilisateur.
+		alert('Une erreur est survenue durant la géolocalisation. Veuillez réessayer plus tard ou contacter le support.');
+	}
+	
+	function afterclic(){
+		var somme = 0;
+		
+		var temp = "";
+		for(var i in route){
+			temp += i + " : " + route[i] + "\r";
+		}
+		
+		for(var i in route["points"]){
+			if(route["points"][i+1])
+				somme += getDistanceFromLatLonInKm(route["points"][i].lat,route["points"][i].lng,route["points"][i+1].lat,route["points"][i+1].lng);
+		}
+		
+		
+		var distanceOiseau = getDistanceFromLatLonInKm(lat,lng,lastLat,lastLng);
+ 
+		
+		if(somme >= (distanceOiseau*2)){
+			somme = somme/10;
+		}
+		
+		if(somme >= (distanceOiseau*2)){
+			somme = somme/10;
+		}
+		
+
+		if(!bFirst){
+			var test = confirm("Etes-vous certain de vouloir vous déplacer jusqu'a la desctination ?");
+			if(test){
+				marker.setLatLng([lastLat,lastLng]);
+				// maj des donénes du jeu+
+				lat = lastLat;
+				lng = lastLng;
+			}else{
+				exampleMap1.removeLayer(route);
+			}
+			exampleMap1.removeLayer(markerDest);
+			
+		}
+	}
+	
+	function addStore(type,lat,lng){
+		var markertemp;
+		switch(type){
+			case "Boulangerie" :
+				markertemp = L.marker([lat,lng], {icon: myIconBakery}).addTo(exampleMap1);
+				break;
+			case "Station service" :
+				markertemp = L.marker([lat,lng], {icon: myIconGasStation}).addTo(exampleMap1);
+				break;
+			case "Garage" :
+				markertemp = L.marker([lat,lng], {icon: myIconTools}).addTo(exampleMap1);
+				break;
+			case "Commisariat" :
+				markertemp = L.marker([lat,lng], {icon: myIconPolice}).addTo(exampleMap1);
+				break;
+		}
+	}
+	
+	function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+	  var R = 6371; // Radius of the earth in km
+	  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+	  var dLon = deg2rad(lon2-lon1); 
+	  var a = 
+		Math.sin(dLat/2) * Math.sin(dLat/2) +
+		Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+		Math.sin(dLon/2) * Math.sin(dLon/2)
+		; 
+	  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	  var d = R * c; // Distance in km
+	  return d;
+	}
+
+	function deg2rad(deg) {
+	  return deg * (Math.PI/180)
+	}
+	</script>
+  </body>
+</html>
