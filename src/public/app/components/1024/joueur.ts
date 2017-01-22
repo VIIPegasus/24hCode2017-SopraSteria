@@ -3,4 +3,6 @@ export class Joueur {
     carte_jouees: number[];
     position_latitude: string;
     position_longitude: string;
+    etat: {etatEssence: Object, etatPneu: Object, etatVoiture: Object, etatVitesse: Object};
+    avancement: number;
 }

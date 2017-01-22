@@ -7,7 +7,7 @@ __phaser = {
     game:{
 
       //-------------------
-      init(canvasEle, appComponent, joueur) {
+      init(canvasEle, appComponent, synthese) {
               // create game object
               var game = new Phaser.Game(800, 500, Phaser.AUTO, canvasEle, { preload: preload, create: create, update: update });
               var gameState = "preload"
@@ -82,10 +82,7 @@ __phaser = {
             function startGame() {
                 gameState = "gameplay"
 
-                // my debug messages
-
-
-                debugText = game.add.text(500, game.world.centerY/2, joueur.name);
+                debugText = game.add.text(500, game.world.centerY/2, synthese.carte.getListeDeMagasinsDisponible("", "")[0].lat);
                 debugText.anchor.set(0.5);
 
                 // define sprite
