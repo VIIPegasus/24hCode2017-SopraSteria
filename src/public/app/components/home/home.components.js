@@ -17,7 +17,8 @@ var HomeComponent = (function () {
         premierJoueur.nom = 'Clark Kent';
         var js = document.createElement("script");
         js.type = "text/javascript";
-        js.src = '../../../1024Game/1024.js';
+        //js.src = '../../../1024Game/1024.js';
+		js.src = '../../../gameDemo/game_card.js';
         document.body.appendChild(js);
         js.onload = function () {
             __phaser.game.init(phaser.container, this, premierJoueur);

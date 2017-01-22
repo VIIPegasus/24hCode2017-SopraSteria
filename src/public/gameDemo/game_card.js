@@ -1,4 +1,4 @@
-var game = new Phaser.Game(720, 480, Phaser.AUTO, null, {
+var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, null, {
   preload: preload, create: create, update: update
 });
 
@@ -7,6 +7,8 @@ var deck,
     debug = true,
     flippedDirty = true,
     cardImgPrefix = 'Carte',
+	Largeur = window.innerWidth * window.devicePixelRatio,
+	Hauteur = window.innerHeight * window.devicePixelRatio,
     cardPool = [
       {suit:'Distance', val:'25'},
       {suit:'Distance', val:'50'},
@@ -32,7 +34,7 @@ var deck,
       {suit:'Botte', val:'Accident'},
     ],
 	cardPositionText,
-	cardLocations = [		{x:50,y:60}, {x:170,y:60}, {x:290,y:60}, {x:410,y:60}, {x:530,y:60}, {x:650,y:60}	];
+	cardLocations = [		{x:Largeur-100,y:100}, {x:Largeur-250,y:100}, {x:Largeur-100,y:260}, {x:Largeur-250,y:260}, {x:Largeur-100,y:420}, {x:Largeur-250,y:420}	];
 
 function preload() {
   game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -40,7 +42,7 @@ function preload() {
   game.scale.pageAlignVertically = true;
   game.stage.backgroundColor = '#255';
 
-  game.load.image('background', '../images/MilleBorne24.png');
+  //game.load.image('background', '../images/MilleBorne24.png');
   game.load.image('DosCarte', '../images/DosCarte.png');
   for(var i = 0; i < cardPool.length; i++) {
      var imgName = cardImgPrefix + cardPool[i].suit + cardPool[i].val;
@@ -50,7 +52,7 @@ function preload() {
 
 function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE);
-  game.add.sprite(0, 0, 'background');
+  //game.add.sprite(0, 0, 'background');
   
   initDeck(); 
   
@@ -100,6 +102,7 @@ function createCard(suit, value, cardX, cardY, flipped) {
   newCard.events.onInputDown.add(function() {
 	deck.bringToTop(newCard);
     selectedCard = newCard;
+	game.add.tween(newCard).to( { y: game.world.centerY }, 4000, Phaser.Easing.Bounce.Out, true);
   }, this);
 
   return newCard;
