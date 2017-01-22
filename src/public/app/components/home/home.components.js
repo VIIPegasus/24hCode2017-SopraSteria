@@ -17,7 +17,7 @@ var HomeComponent = (function () {
     HomeComponent.prototype.phaserLink1 = function (phaser) {
         var js = document.createElement("script");
         js.type = "text/javascript";
-        js.src = '../../../gameDemo/demo.js';
+        js.src = '../../../gameDemo/game_card.js';
         document.body.appendChild(js);
         js.onload = function () {
             __phaser.game.init(phaser.container, this);
