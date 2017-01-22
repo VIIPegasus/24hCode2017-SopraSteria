@@ -9,7 +9,7 @@ export class Magasin {
     deck: Deck;
 
     test() : Magasin {
-        let a : Magasin;
+        let a: Magasin;
 
         a.nom = "Garage Adam";
         a.type = "Garage";
