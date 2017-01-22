@@ -175,7 +175,12 @@ function moveCard(card){
 	if(card.key.match("CarteDistance")) {
 		game.add.tween(card).to( { x: DebutCarte+LargeurCartes/8 ,y: (6.5*Hauteur/8)+CarteDistanceHauteur}, 4000, Phaser.Easing.Linear.None, true);	
 		CarteDistanceHauteur = CarteDistanceHauteur + 25;
-		DistanceParcourue = DistanceParcourue + card.key.substring(13,15);
+		if(card.key.match("00")) {
+			DistanceParcourue = parseInt(DistanceParcourue, 10) + parseInt(card.key.substring(13,16), 10);
+		} else {
+			DistanceParcourue = parseInt(DistanceParcourue, 10) + parseInt(card.key.substring(13,15), 10);
+		}
+		
 	}
 	
 	if(card.key.match("CarteObstacle")) {		
