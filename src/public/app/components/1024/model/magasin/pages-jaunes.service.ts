@@ -13,23 +13,18 @@ export class PagesJaunes {
     }
 
     public obtenirListeMagasins(lat: string, lon: string) : Array<Magasin> {
-        let result: Array<Magasin>;
-        let a: Magasin;
-        a = a.test();
-
-        var resultQuery = this.queryPagesJaunes("garage","48.0042991","0.1997244");
+        let result = this.queryPagesJaunes("garage","48.0042991","0.1997244");
         console.log("resultQuery");
-        console.log(resultQuery);
+        console.log(result);
 
         // Do magic
-        result.push(a);
 
         return result;
     }
 
 
-    queryPagesJaunes(type: string, lat: string, lon: string) : string {
-        var result;
+    queryPagesJaunes(type: string, lat: string, lon: string) : Array<Magasin> {
+        var result = new Array<Magasin>();
         var headers = {
             "Accept": "application/json"
         };
@@ -37,14 +32,15 @@ export class PagesJaunes {
         var urlArgs = "what=" + type + "&where=cZ" + lon + "," + lat + "&proximity=true";
 
         console.log(baseUrl + urlArgs);
+        let a: Magasin;
+        result.push(a.test());
 
+        /*
         this.http.get(baseUrl + "?" + urlArgs)
         .map(res => res.json())
         .subscribe(data => {
           result = data;
-        });
-
-        console.log(result);
+      });*/
 
         return result;
     }

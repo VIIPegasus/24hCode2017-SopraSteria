@@ -15,30 +15,28 @@ var PagesJaunes = (function () {
         this.http = http;
     }
     PagesJaunes.prototype.obtenirListeMagasins = function (lat, lon) {
-        var result;
-        var a;
-        a = a.test();
-        var resultQuery = this.queryPagesJaunes("garage", "48.0042991", "0.1997244");
+        var result = this.queryPagesJaunes("garage", "48.0042991", "0.1997244");
         console.log("resultQuery");
-        console.log(resultQuery);
+        console.log(result);
         // Do magic
-        result.push(a);
         return result;
     };
     PagesJaunes.prototype.queryPagesJaunes = function (type, lat, lon) {
-        var result;
+        var result = new Array();
         var headers = {
             "Accept": "application/json"
         };
         var baseUrl = "https://api.apipagesjaunes.fr/pros/find.json";
         var urlArgs = "what=" + type + "&where=cZ" + lon + "," + lat + "&proximity=true";
         console.log(baseUrl + urlArgs);
+        var a;
+        result.push(a.test());
+        /*
         this.http.get(baseUrl + "?" + urlArgs)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (data) {
-            result = data;
-        });
-        console.log(result);
+        .map(res => res.json())
+        .subscribe(data => {
+          result = data;
+      });*/
         return result;
     };
     return PagesJaunes;
