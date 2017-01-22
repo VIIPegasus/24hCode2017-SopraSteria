@@ -33,11 +33,11 @@ var PagesJaunes = (function () {
         var baseUrl = "https://api.apipagesjaunes.fr/pros/find.json";
         var urlArgs = "what=" + type + "&where=cZ" + lon + "," + lat + "&proximity=true";
         console.log(baseUrl + urlArgs);
-        this.http.get(baseUrl + "?" + urlArgs)
+        /*this.http.get(baseUrl + "?" + urlArgs)
             .map(function (res) { return res.json(); })
             .subscribe(function (data) {
             result = data;
-        });
+        });*/
         console.log(result);
         return result;
     };
