@@ -1,4 +1,5 @@
 import {Deck} from '../cards/deck'
+import {Card}from '../cards/card'
 
 export class Magasin {
     nom: string;
