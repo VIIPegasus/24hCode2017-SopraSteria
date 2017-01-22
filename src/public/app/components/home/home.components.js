@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var ng2phaser_1 = require("../../../node_modules/ang2-phaser/ng2phaser");
 var joueur_1 = require("../1024/joueur");
+var synthese_1 = require("../1024/model/synthese");
+var carte_mappy_1 = require("../1024/model/carte-mappy/carte-mappy");
+var pages_jaunes_service_1 = require("../1024/model/magasin/pages-jaunes.service");
 var HomeComponent = (function () {
     function HomeComponent() {
     }
@@ -15,12 +18,17 @@ var HomeComponent = (function () {
     HomeComponent.prototype.phaserLink1 = function (phaser) {
         var premierJoueur = new joueur_1.Joueur;
         premierJoueur.nom = 'Clark Kent';
+        var map = new carte_mappy_1.CarteMappy;
+        var c = (new pages_jaunes_service_1.PagesJaunes).queryPagesJaunes("garage", "48.0042991", "0.1997244");
+        var syntheseJeu = new synthese_1.Synthese;
+        syntheseJeu.setJoueur(premierJoueur);
+        syntheseJeu.setCarte(map);
         var js = document.createElement("script");
         js.type = "text/javascript";
         js.src = '../../../1024Game/1024.js';
         document.body.appendChild(js);
         js.onload = function () {
-            __phaser.game.init(phaser.container, this, premierJoueur);
+            __phaser.game.init(phaser.container, this, syntheseJeu);
         };
     };
     //---------------
