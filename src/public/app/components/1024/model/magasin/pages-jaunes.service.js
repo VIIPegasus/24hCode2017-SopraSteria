@@ -9,10 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
+var magasin_1 = require("./magasin");
 var PagesJaunes = (function () {
-    function PagesJaunes(http) {
-        this.http = http;
+    function PagesJaunes() {
     }
     PagesJaunes.prototype.obtenirListeMagasins = function (lat, lon) {
         var result = this.queryPagesJaunes("garage", "48.0042991", "0.1997244");
@@ -29,19 +28,21 @@ var PagesJaunes = (function () {
         var baseUrl = "https://api.apipagesjaunes.fr/pros/find.json";
         var urlArgs = "what=" + type + "&where=cZ" + lon + "," + lat + "&proximity=true";
         console.log(baseUrl + urlArgs);
-        /*this.http.get(baseUrl + "?" + urlArgs)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (data) {
-            result = data;
-        });*/
-        console.log(result);
+        var a = new magasin_1.Magasin;
+        result.push(a.test());
+        /*
+        this.http.get(baseUrl + "?" + urlArgs)
+        .map(res => res.json())
+        .subscribe(data => {
+          result = data;
+      });*/
         return result;
     };
     return PagesJaunes;
 }());
 PagesJaunes = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [])
 ], PagesJaunes);
 exports.PagesJaunes = PagesJaunes;
 //# sourceMappingURL=pages-jaunes.service.js.map

@@ -15,7 +15,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "\n\n    <a [routerLink]=\"['/']\">Game 1</a>\n\t  <a [routerLink]=\"['/alt']\">Game 2</a>\n    <div class=\"outer-outlet\">\n      <router-outlet></router-outlet>\n    </div>\n  ",
+        template: "\n  <router-outlet></router-outlet>\n  ",
         // add our router directives we will be using
         directives: [router_1.ROUTER_DIRECTIVES]
     })

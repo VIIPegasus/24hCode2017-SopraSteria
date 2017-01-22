@@ -3,10 +3,13 @@ import {Joueur} from '../joueur'
 import {EtatAnormal} from './etat/etat-anormal'
 import {EtatInvincible} from './etat/etat-invincible'
 import {EtatNormal} from './etat/etat-normal'
+import {Deck} from './cards/deck'
+import {Card} from './cards/card'
 
 export class Synthese {
     carte: CarteMappy;
     joueur: Joueur;
+    deck_general: Deck;
 
     start() {
     }
@@ -35,4 +38,25 @@ export class Synthese {
         return 0;
     }
 
+    obtenirPremiereMainJoueur() : Deck {
+        var main = new Deck();
+        for(var i = 0; i < 6; i++) {
+            main.addCard(this.deck_general.liste_carte.pop());
+        }
+        return main;
+    }
+
+    /**
+     * Shuffles array in place.
+     * @param {Array} a items The array containing the items.
+     */
+    shuffle(a: Array<Card>) : void {
+        var j, x, i;
+        for (i = a.length; i; i--) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        }
+    }
 }

@@ -3,7 +3,7 @@ var Magasin = (function () {
     function Magasin() {
     }
     Magasin.prototype.test = function () {
-        var a;
+        var a = new Magasin;
         a.nom = "Garage Adam";
         a.type = "Garage";
         a.lat = "47.9965347";

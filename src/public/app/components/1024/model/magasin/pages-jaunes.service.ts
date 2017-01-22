@@ -6,10 +6,8 @@ import {Magasin} from './magasin'
 
 @Injectable()
 export class PagesJaunes {
-    http: Http;
 
-    constructor(http: Http) {
-        this.http = http;
+    constructor() {
     }
 
     public obtenirListeMagasins(lat: string, lon: string) : Array<Magasin> {
@@ -32,7 +30,7 @@ export class PagesJaunes {
         var urlArgs = "what=" + type + "&where=cZ" + lon + "," + lat + "&proximity=true";
 
         console.log(baseUrl + urlArgs);
-        let a: Magasin;
+        var a = new Magasin;
         result.push(a.test());
 
         /*

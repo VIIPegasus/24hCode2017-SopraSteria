@@ -1,6 +1,11 @@
 "use strict";
 var Card = (function () {
-    function Card() {
+    function Card(nom, type, influence, valeur) {
+        this.nom = nom;
+        this.img = 'Carte' + type + valeur;
+        this.type = type;
+        this.influence = influence;
+        this.valeur = valeur;
     }
     return Card;
 }());
